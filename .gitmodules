@@ -1,0 +1,3 @@
+[submodule "hrv-sample-data"]
+	path = hrv-sample-data
+	url = https://github.com/HRVBand/hrv-sample-data.git
