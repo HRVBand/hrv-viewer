@@ -1,4 +1,4 @@
-package controller;
+package fasades;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import units.TimeUnitConverter.TimeUnit;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
-public class HRVCalculateController {
+public class HRVCalculateFasade {
 
 	public PowerSpectrum getPowerSpectrum(RRData data) {
 		HRVMultiDataManipulator mani = new HRVMultiDataManipulator();
