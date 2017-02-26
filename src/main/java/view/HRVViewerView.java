@@ -13,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import controller.HRVDataController;
 import hrv.RRData;
 import hrv.files.HRVIBIFileReader;
 import units.TimeUnitConverter.TimeUnit;
@@ -23,6 +24,8 @@ public class HRVViewerView extends JFrame {
 	private JMenu fileMenu;
 	private JMenuItem selectFileMenuItem;
 
+	HRVDataController dataController = new HRVDataController();
+	
 	HRVCalculationResultsView calculationResultsView = new HRVCalculationResultsView();
 	HRVDataView dataView = new HRVDataView();
 	
@@ -35,6 +38,9 @@ public class HRVViewerView extends JFrame {
 	}
 
 	public JPanel createContentPane() {
+		dataController.addRRDataChangedListener(dataView);
+		dataController.addRRDataChangedListener(calculationResultsView);		
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 		contentPanel.add(dataView);
@@ -77,8 +83,7 @@ public class HRVViewerView extends JFrame {
 						data.changeTimeAxisUnit(TimeUnit.SECOND);
 						data.changeValuesAxisUnit(TimeUnit.SECOND);
 
-						 calculationResultsView.onRRDataUpdate(data);
-						 dataView.onRRDataUpdate(data);
+						dataController.rrDataChanged(data);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

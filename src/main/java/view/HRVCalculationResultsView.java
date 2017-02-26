@@ -25,12 +25,14 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import adapter.XYSeriesAdapter;
 import common.ArrayUtils;
+import controller.HRVDataController.RRDataChangedEvent;
+import controller.HRVDataController.RRDataChangedListener;
 import fasades.HRVCalculateFacade;
 import hrv.RRData;
 import hrv.calc.parameter.HRVParameter;
 import hrv.calc.psd.PowerSpectrum;
 
-public class HRVCalculationResultsView extends JPanel {
+public class HRVCalculationResultsView extends JPanel implements RRDataChangedListener {
 
 	JFreeChart powerPlotChart;
 	JTable statisticsTable;
@@ -106,18 +108,6 @@ public class HRVCalculationResultsView extends JPanel {
 		return cp;
 	}
 	
-	protected void onRRDataUpdate(RRData newData) {
-		updateStatisticsTable(newData);
-
-		PowerSpectrum ps = controller.getPowerSpectrum(newData);
-		updateFrequencyTable(ps);
-		
-		PowerSpectrum psCut = cutPowerSpectrum(ps, 0.5);
-	
-		
-		updateMainChart(createXYSeriesCollection(psCut));
-	}
-	
 	private void updateStatisticsTable(RRData data) {
 		List<HRVParameter> params = controller.getAllStatisticsParameters(data);
 
@@ -167,5 +157,19 @@ public class HRVCalculationResultsView extends JPanel {
 
 		return new PowerSpectrum(ArrayUtils.toPrimitive(newPower, 0.0),
 				ArrayUtils.toPrimitive(newFrequency, 0.0));
+	}
+
+	@Override
+	public void rrDataChanged(RRDataChangedEvent e) {
+
+		updateStatisticsTable(e.getRRData());
+
+		PowerSpectrum ps = controller.getPowerSpectrum(e.getRRData());
+		updateFrequencyTable(ps);
+		
+		PowerSpectrum psCut = cutPowerSpectrum(ps, 0.5);
+	
+		
+		updateMainChart(createXYSeriesCollection(psCut));
 	}
 }

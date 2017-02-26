@@ -18,11 +18,13 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import adapter.XYSeriesAdapter;
+import controller.HRVDataController.RRDataChangedEvent;
+import controller.HRVDataController.RRDataChangedListener;
 import fasades.HRVCalculateFacade;
 import hrv.RRData;
 import hrv.calc.psd.PowerSpectrum;
 
-public class HRVDataView extends JPanel {
+public class HRVDataView extends JPanel implements RRDataChangedListener {
 
 	JFreeChart rrDataChart;
 	
@@ -44,10 +46,6 @@ public class HRVDataView extends JPanel {
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(xySeries);
 		return dataset;
-	}	
-	
-	protected void onRRDataUpdate(RRData newData) {
-		updateMainChart(createXYSeriesCollection(newData));
 	}
 	
 	private void updateMainChart(XYDataset xyDataset) {
@@ -74,5 +72,10 @@ public class HRVDataView extends JPanel {
 
 		cp.setMouseWheelEnabled(false);
 		return cp;
+	}
+
+	@Override
+	public void rrDataChanged(RRDataChangedEvent e) {
+		updateMainChart(createXYSeriesCollection(e.getRRData()));
 	}
 }
