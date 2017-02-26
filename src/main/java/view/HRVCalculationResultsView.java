@@ -25,7 +25,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import adapter.XYSeriesAdapter;
 import common.ArrayUtils;
-import fasades.HRVCalculateFasade;
+import fasades.HRVCalculateFacade;
 import hrv.RRData;
 import hrv.calc.parameter.HRVParameter;
 import hrv.calc.psd.PowerSpectrum;
@@ -36,7 +36,7 @@ public class HRVCalculationResultsView extends JPanel {
 	JTable statisticsTable;
 	JTable frequencyTable;	
 	
-	private HRVCalculateFasade controller = new HRVCalculateFasade();
+	private HRVCalculateFacade controller = new HRVCalculateFacade();
 	
 	public HRVCalculationResultsView() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

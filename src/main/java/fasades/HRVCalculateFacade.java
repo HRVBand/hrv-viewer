@@ -27,7 +27,7 @@ import units.TimeUnitConverter.TimeUnit;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
-public class HRVCalculateFasade {
+public class HRVCalculateFacade {
 
 	public PowerSpectrum getPowerSpectrum(RRData data) {
 		HRVMultiDataManipulator mani = new HRVMultiDataManipulator();

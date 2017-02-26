@@ -18,7 +18,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import adapter.XYSeriesAdapter;
-import fasades.HRVCalculateFasade;
+import fasades.HRVCalculateFacade;
 import hrv.RRData;
 import hrv.calc.psd.PowerSpectrum;
 
@@ -26,7 +26,7 @@ public class HRVDataView extends JPanel {
 
 	JFreeChart rrDataChart;
 	
-	private HRVCalculateFasade controller = new HRVCalculateFasade();
+	private HRVCalculateFacade controller = new HRVCalculateFacade();
 	
 	public HRVDataView() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
